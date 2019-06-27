@@ -54,9 +54,9 @@ namespace exploringBB {
 		stringstream s;
 		s << SPI_PATH << bus << "." << device;
 		this->filename = string(s.str());
-		this->mode = SPIDevice::MODE2;
+		this->mode = SPIDevice::MODE0;
 		this->bits = 8;
-		this->speed = 90000000;
+		this->speed = 40000000;
 		this->delay = 0;
 		this->open();
 	}
@@ -158,10 +158,11 @@ namespace exploringBB {
 		unsigned char null_return = 0x00;
 		
 		unsigned char word[2];
+		memset(word, 0, sizeof word);
 		word[0] = 0x14;
 		word[1] = 0x13; 
 		//word[1]= 0x
-		memset(word, 0, sizeof word);
+		
 		//printf("[%02x]", value);
 		this->transfer(word, &null_return, 2);
 		this->close();
